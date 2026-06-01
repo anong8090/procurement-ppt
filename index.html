@@ -1834,6 +1834,13 @@
                 width: 100% !important;
                 max-height: 70vh;
                 border-radius: 16px 16px 0 0 !important;
+                /* 手机端用 translateY 控制显隐，覆盖桌面端 right 动画 */
+                transform: translateY(110%) !important;
+                transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+            }
+
+            .index-drawer.open {
+                transform: translateY(0) !important;
             }
 
             /* 隐藏全屏按钮（手机不支持） */
@@ -2177,7 +2184,7 @@
                     <div class="glass-card" style="padding: 0.6rem 0.85rem; border-radius: 12px; display: flex; flex-direction: column; gap: 0.25rem; border-color: rgba(13, 148, 136, 0.2); background: rgba(13, 148, 136, 0.02);">
                         <h4 style="font-size: 1.0rem; font-weight: 800; color: var(--color-teal); display: flex; align-items: center; gap: 0.25rem; margin: 0 0 0.25rem 0;">
                             <i data-lucide="arrow-right-circle" style="width:14px;height:14px;"></i>
-                            <span>① 历史合同清单入库并建库</span>
+                            <span>历史合同清单入库并建库</span>
                         </h4>
                         <p style="font-size: 0.85rem; line-height: 1.45; color: var(--text-secondary); margin: 0;">
                             支持批量或单个合同附件（PDF扫描件/Excel清单）上传。通过大模型智能解析物料品名、规格、单价等核心四要素，并在向量数据库中匹配公司标准 SKU。若匹配度不足支持人工干预，最终审批入库形成公司唯一的采购价格底座大库。
@@ -2188,7 +2195,7 @@
                     <div class="glass-card" style="padding: 0.6rem 0.85rem; border-radius: 12px; display: flex; flex-direction: column; gap: 0.25rem; border-color: rgba(59, 130, 246, 0.2); background: rgba(59, 130, 246, 0.02);">
                         <h4 style="font-size: 1.0rem; font-weight: 800; color: var(--color-indigo-dark); display: flex; align-items: center; gap: 0.25rem; margin: 0 0 0.25rem 0;">
                             <i data-lucide="arrow-right-circle" style="width:14px;height:14px;"></i>
-                            <span>② 招标前控制价预测与风控</span>
+                            <span>招标前控制价预测与风控</span>
                         </h4>
                         <p style="font-size: 0.85rem; line-height: 1.45; color: var(--text-secondary); margin: 0;">
                             在新采购项目发布前导入无价需求清单，系统自动关联大库标准 SKU 并调取该物料的历史大宗交易水位。计算近30天历史均价及最高最低限价，建立偏差率监控线，对于高溢价物料整行拦截，科学确立招采控标价。
@@ -2199,7 +2206,7 @@
                     <div class="glass-card" style="padding: 0.6rem 0.85rem; border-radius: 12px; display: flex; flex-direction: column; gap: 0.25rem; border-color: rgba(225, 29, 72, 0.2); background: rgba(225, 29, 72, 0.02);">
                         <h4 style="font-size: 1.0rem; font-weight: 800; color: var(--color-rose); display: flex; align-items: center; gap: 0.25rem; margin: 0 0 0.25rem 0;">
                             <i data-lucide="arrow-right-circle" style="width:14px;height:14px;"></i>
-                            <span>③ 供应商回标平铺比价与定标</span>
+                            <span>供应商回标平铺比价与定标</span>
                         </h4>
                         <p style="font-size: 0.85rem; line-height: 1.45; color: var(--text-secondary); margin: 0;">
                             导入各投标商回标单，以招标清单为基准线全自动拉平明细，进行横向报价大表平铺与纵向历史水位对标。支持折算税额，最低价自动绿色高亮。确认定标后，中选实际成交价一键自动写入大库，完成数据自我迭代自循环。
