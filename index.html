@@ -653,22 +653,25 @@
         }
 
         /* Draw.io 15步场景大图 */
+        /* Draw.io 15步场景大图 */
         .drawio-viewport {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.0rem;
             flex-grow: 1;
             margin-bottom: 0.5rem;
+            justify-content: center;
         }
 
         .scenario-column {
             background: #FFFFFF;
             border: 1px solid var(--border-glass);
             border-radius: 16px;
-            padding: 1.0rem;
+            padding: 0.75rem 1.25rem;
             display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+            flex-direction: row;
+            align-items: center;
+            gap: 1.0rem;
             box-shadow: 0 4px 10px rgba(0,0,0,0.02);
             transition: all 0.3s ease;
             position: relative;
@@ -690,7 +693,7 @@
         }
         .scenario-column.theme-teal .scenario-column-title {
             color: var(--color-teal);
-            border-bottom: 1px solid rgba(13, 148, 136, 0.15);
+            border-right: 1px solid rgba(13, 148, 136, 0.15);
         }
         .scenario-column.theme-teal .step-node-item {
             border-color: rgba(13, 148, 136, 0.12);
@@ -719,7 +722,7 @@
         }
         .scenario-column.theme-indigo .scenario-column-title {
             color: var(--color-indigo-dark);
-            border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+            border-right: 1px solid rgba(59, 130, 246, 0.15);
         }
         .scenario-column.theme-indigo .step-node-item {
             border-color: rgba(59, 130, 246, 0.12);
@@ -748,7 +751,7 @@
         }
         .scenario-column.theme-rose .scenario-column-title {
             color: var(--color-rose);
-            border-bottom: 1px solid rgba(225, 29, 72, 0.15);
+            border-right: 1px solid rgba(225, 29, 72, 0.15);
         }
         .scenario-column.theme-rose .step-node-item {
             border-color: rgba(225, 29, 72, 0.12);
@@ -767,11 +770,13 @@
         }
 
         .scenario-column-title {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             font-weight: 800;
             color: var(--text-primary);
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            width: 220px;
+            flex-shrink: 0;
+            padding-bottom: 0;
+            padding-right: 1.0rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -781,12 +786,14 @@
             background: #F8FAFC;
             border: 1px solid var(--border-glass);
             border-radius: 10px;
-            padding: 0.65rem 0.75rem;
+            padding: 0.5rem 0.75rem;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.5rem;
             position: relative;
             transition: all 0.3s ease;
+            flex: 1;
+            min-width: 0;
         }
 
         .step-node-num {
@@ -804,9 +811,9 @@
         }
 
         .step-node-text {
-            font-size: 0.92rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
-            line-height: 1.4;
+            line-height: 1.35;
         }
 
         .step-flow-arrow {
@@ -814,7 +821,18 @@
             color: rgba(0,0,0,0.15);
             font-size: 0.75rem;
             line-height: 1;
-            margin: -0.3rem 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-flow-arrow .arrow-mobile {
+            display: none !important;
+        }
+        .step-flow-arrow .arrow-desktop {
+            display: inline-block !important;
         }
 
         .drawio-bottom-desc {
@@ -1843,6 +1861,50 @@
                 transform: translateY(0) !important;
             }
 
+            /* Slide 4 Scenario column layout on mobile */
+            .drawio-viewport {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 1.0rem !important;
+            }
+            .scenario-column {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                padding: 1.0rem !important;
+                gap: 0.5rem !important;
+            }
+            .scenario-column-title {
+                width: 100% !important;
+                padding-right: 0 !important;
+                padding-bottom: 0.5rem !important;
+                border-right: none !important;
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+            }
+            .scenario-column.theme-teal .scenario-column-title {
+                border-bottom: 1px solid rgba(13, 148, 136, 0.15) !important;
+            }
+            .scenario-column.theme-indigo .scenario-column-title {
+                border-bottom: 1px solid rgba(59, 130, 246, 0.15) !important;
+            }
+            .scenario-column.theme-rose .scenario-column-title {
+                border-bottom: 1px solid rgba(225, 29, 72, 0.15) !important;
+            }
+            .step-node-item {
+                flex: none !important;
+                width: 100% !important;
+            }
+            .step-flow-arrow {
+                margin: -0.3rem 0 !important;
+            }
+            .step-flow-arrow .arrow-mobile {
+                display: inline-block !important;
+            }
+            .step-flow-arrow .arrow-desktop {
+                display: none !important;
+            }
+
             /* 隐藏全屏按钮（手机不支持） */
             button[onclick="toggleFullScreen()"] {
                 display: none !important;
@@ -2076,25 +2138,37 @@
                             <div class="step-node-num">1</div>
                             <div class="step-node-text">上传历史合同附件 (支持 Excel/PDF)</div>
                         </div>
-                        <div class="step-flow-arrow"><i data-lucide="chevron-down" style="width:12px;height:12px;"></i></div>
+                        <div class="step-flow-arrow">
+                            <i class="arrow-desktop" data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+                            <i class="arrow-mobile" data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+                        </div>
                         
                         <div class="step-node-item">
                             <div class="step-node-num">2</div>
                             <div class="step-node-text">AI 自动解析提取明细四要素</div>
                         </div>
-                        <div class="step-flow-arrow"><i data-lucide="chevron-down" style="width:12px;height:12px;"></i></div>
+                        <div class="step-flow-arrow">
+                            <i class="arrow-desktop" data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+                            <i class="arrow-mobile" data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+                        </div>
                         
                         <div class="step-node-item">
                             <div class="step-node-num">3</div>
                             <div class="step-node-text">语义向量自动检索物料大库</div>
                         </div>
-                        <div class="step-flow-arrow"><i data-lucide="chevron-down" style="width:12px;height:12px;"></i></div>
+                        <div class="step-flow-arrow">
+                            <i class="arrow-desktop" data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+                            <i class="arrow-mobile" data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+                        </div>
                         
                         <div class="step-node-item">
                             <div class="step-node-num">4</div>
                             <div class="step-node-text">匹配置信度判断 (高入库/低干预)</div>
                         </div>
-                        <div class="step-flow-arrow"><i data-lucide="chevron-down" style="width:12px;height:12px;"></i></div>
+                        <div class="step-flow-arrow">
+                            <i class="arrow-desktop" data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+                            <i class="arrow-mobile" data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+                        </div>
                         
                         <div class="step-node-item">
                             <div class="step-node-num">5</div>
@@ -2113,25 +2187,37 @@
                             <div class="step-node-num">1</div>
                             <div class="step-node-text">导入待招采清单 Excel</div>
                         </div>
-                        <div class="step-flow-arrow"><i data-lucide="chevron-down" style="width:12px;height:12px;"></i></div>
+                        <div class="step-flow-arrow">
+                            <i class="arrow-desktop" data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+                            <i class="arrow-mobile" data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+                        </div>
                         
                         <div class="step-node-item">
                             <div class="step-node-num">2</div>
                             <div class="step-node-text">自动关联系统标准 SKU 字典</div>
                         </div>
-                        <div class="step-flow-arrow"><i data-lucide="chevron-down" style="width:12px;height:12px;"></i></div>
+                        <div class="step-flow-arrow">
+                            <i class="arrow-desktop" data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+                            <i class="arrow-mobile" data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+                        </div>
                         
                         <div class="step-node-item">
                             <div class="step-node-num">3</div>
                             <div class="step-node-text">大库调取该 SKU 历史成交价</div>
                         </div>
-                        <div class="step-flow-arrow"><i data-lucide="chevron-down" style="width:12px;height:12px;"></i></div>
+                        <div class="step-flow-arrow">
+                            <i class="arrow-desktop" data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+                            <i class="arrow-mobile" data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+                        </div>
                         
                         <div class="step-node-item">
                             <div class="step-node-num">4</div>
                             <div class="step-node-text">计算多维度控制指标 (均/高/低限)</div>
                         </div>
-                        <div class="step-flow-arrow"><i data-lucide="chevron-down" style="width:12px;height:12px;"></i></div>
+                        <div class="step-flow-arrow">
+                            <i class="arrow-desktop" data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+                            <i class="arrow-mobile" data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+                        </div>
                         
                         <div class="step-node-item">
                             <div class="step-node-num">5</div>
@@ -2150,25 +2236,37 @@
                             <div class="step-node-num">1</div>
                             <div class="step-node-text">导入多家供应商回标 Excel</div>
                         </div>
-                        <div class="step-flow-arrow"><i data-lucide="chevron-down" style="width:12px;height:12px;"></i></div>
+                        <div class="step-flow-arrow">
+                            <i class="arrow-desktop" data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+                            <i class="arrow-mobile" data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+                        </div>
                         
                         <div class="step-node-item">
                             <div class="step-node-num">2</div>
                             <div class="step-node-text">以招标清单为基准线，全自动拉平明细</div>
                         </div>
-                        <div class="step-flow-arrow"><i data-lucide="chevron-down" style="width:12px;height:12px;"></i></div>
+                        <div class="step-flow-arrow">
+                            <i class="arrow-desktop" data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+                            <i class="arrow-mobile" data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+                        </div>
                         
                         <div class="step-node-item">
                             <div class="step-node-num">3</div>
                             <div class="step-node-text">调取大库成交均价，横纵直接比价</div>
                         </div>
-                        <div class="step-flow-arrow"><i data-lucide="chevron-down" style="width:12px;height:12px;"></i></div>
+                        <div class="step-flow-arrow">
+                            <i class="arrow-desktop" data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+                            <i class="arrow-mobile" data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+                        </div>
                         
                         <div class="step-node-item">
                             <div class="step-node-num">4</div>
                             <div class="step-node-text">组装平铺比价大表 (红绿警示)</div>
                         </div>
-                        <div class="step-flow-arrow"><i data-lucide="chevron-down" style="width:12px;height:12px;"></i></div>
+                        <div class="step-flow-arrow">
+                            <i class="arrow-desktop" data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+                            <i class="arrow-mobile" data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+                        </div>
                         
                         <div class="step-node-item">
                             <div class="step-node-num">5</div>
