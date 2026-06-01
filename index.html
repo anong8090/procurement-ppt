@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>通用型“双闭环”智能招采比价与合同管理系统介绍</title>
     <!-- 引入 Google Fonts 字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -1639,6 +1639,229 @@
             visibility: hidden !important;
             pointer-events: none !important;
         }
+
+        /* =============================================================
+           手机端自适应布局 Mobile Responsive (≤767px)
+           ============================================================= */
+        @media (max-width: 767px) {
+
+            /* 移动端根字体：固定基准，不依赖 vw */
+            html {
+                font-size: 15px !important;
+            }
+
+            /* body 允许整页滚动 */
+            body {
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                height: auto !important;
+                min-height: 100dvh;
+                width: 100%;
+            }
+
+            /* 背景装饰固定定位 */
+            .grid-bg, .glow-node-1, .glow-node-2 {
+                position: fixed !important;
+            }
+
+            /* 整体布局容器高度 auto */
+            .presentation {
+                height: auto !important;
+                min-height: 100dvh;
+            }
+
+            /* 顶栏固定吸顶 */
+            header {
+                position: sticky;
+                top: 0;
+                z-index: 300;
+                height: 56px !important;
+                padding: 0 1rem !important;
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+            }
+
+            .brand-title {
+                font-size: 0.85rem !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 180px;
+            }
+
+            .section-tag {
+                font-size: 0.65rem !important;
+                padding: 0.25rem 0.6rem !important;
+                letter-spacing: 0.8px !important;
+            }
+
+            /* 幻灯片容器高度 auto，不裁剪 */
+            .slide-container {
+                height: auto !important;
+                overflow: visible !important;
+                flex-grow: 0;
+            }
+
+            /* 所有幻灯片：改为垂直堆叠静态块 */
+            .slide {
+                position: relative !important;
+                inset: auto !important;
+                opacity: 1 !important;
+                transform: none !important;
+                pointer-events: auto !important;
+                display: flex !important;
+                min-height: 100svh;
+                padding: 1.25rem 1rem 5rem !important;
+                transition: none !important;
+                border-bottom: 1px solid var(--border-glass);
+                scroll-margin-top: 56px;
+            }
+
+            /* no-transition 模式下也显示全部 slide（PDF 导出依赖 hash 模式，不影响） */
+            body.no-transition .slide:not(.active) {
+                opacity: 1 !important;
+                display: flex !important;
+                transform: none !important;
+            }
+
+            /* 当前幻灯片淡蓝高亮 */
+            .slide.active {
+                background: rgba(59, 130, 246, 0.018) !important;
+            }
+
+            /* ---- 网格布局 ---- */
+            /* 二列 → 单列 */
+            .slide-grid-2 {
+                grid-template-columns: 1fr !important;
+                height: auto !important;
+                gap: 1rem !important;
+            }
+
+            /* 三列 → 二列 */
+            .slide-grid-3 {
+                grid-template-columns: 1fr 1fr !important;
+                height: auto !important;
+                gap: 0.75rem !important;
+            }
+
+            /* 四列 → 二列 */
+            .slide-grid-4 {
+                grid-template-columns: 1fr 1fr !important;
+                height: auto !important;
+                gap: 0.6rem !important;
+            }
+
+            /* ---- 文字大小 ---- */
+            .slide-main-title {
+                font-size: 1.45rem !important;
+                line-height: 1.25 !important;
+            }
+
+            .slide-subtitle {
+                font-size: 0.82rem !important;
+                margin-top: 0.3rem !important;
+            }
+
+            .slide-title-container {
+                margin-bottom: 1rem !important;
+            }
+
+            .card-title {
+                font-size: 0.9rem !important;
+            }
+
+            .card-text {
+                font-size: 0.78rem !important;
+            }
+
+            /* ---- 封面页 ---- */
+            .cover-title {
+                font-size: 1.6rem !important;
+                line-height: 1.3 !important;
+            }
+
+            .cover-desc {
+                font-size: 0.8rem !important;
+                line-height: 1.6 !important;
+            }
+
+            /* ---- 底栏固定吸底 ---- */
+            footer {
+                position: sticky;
+                bottom: 0;
+                z-index: 300;
+                height: 56px !important;
+                padding: 0 1rem !important;
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+            }
+
+            /* 进度条隐藏（滚动感知位置更直观） */
+            .progress-bar-container {
+                display: none !important;
+            }
+
+            /* 按钮尺寸收紧 */
+            .btn-ctrl {
+                width: 36px !important;
+                height: 36px !important;
+            }
+
+            /* 图片限高防止截图撑开过多 */
+            .slide-grid-2 img[src*="system_screenshots"],
+            .slide-grid-3 img[src*="system_screenshots"],
+            .slide-grid-4 img[src*="system_screenshots"] {
+                max-height: 55vw;
+            }
+
+            /* neon-list 间距收紧 */
+            .neon-list-item {
+                padding: 0.55rem 0.6rem !important;
+                font-size: 0.78rem !important;
+            }
+
+            /* 聊天气泡字号 */
+            .chat-bubble {
+                font-size: 0.78rem !important;
+            }
+
+            /* 目录抽屉在移动端从底部弹出 */
+            .index-drawer {
+                bottom: 56px !important;
+                top: auto !important;
+                right: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                max-height: 70vh;
+                border-radius: 16px 16px 0 0 !important;
+            }
+
+            /* 隐藏全屏按钮（手机不支持） */
+            button[onclick="toggleFullScreen()"] {
+                display: none !important;
+            }
+        }
+
+        /* =============================================================
+           平板横屏 Tablet (768px–1024px)
+           ============================================================= */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            html {
+                font-size: min(calc(100vw / 100), calc(100vh / 56.25));
+            }
+
+            header {
+                padding: 0 2rem;
+            }
+
+            .slide {
+                padding: 2rem 3rem;
+            }
+
+            .slide-main-title {
+                font-size: 1.75rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2722,6 +2945,11 @@
             "尾页：产品运行终端与演示预约"
         ];
 
+        // 检测是否为移动端
+        function isMobileView() {
+            return window.innerWidth <= 767;
+        }
+
         function showSlide(index) {
             if (index < 0 || index >= totalSlides) return;
             
@@ -2737,9 +2965,16 @@
             document.getElementById('currentSectionTag').innerText = sectionName;
             
             updateDrawerHighlight();
+
+            // 移动端：滚动到目标幻灯片
+            if (isMobileView()) {
+                slides[currentSlideIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
             
-            // 触发幻灯片切入动画
-            onSlideChange(currentSlideIndex);
+            // 触发幻灯片切入动画（桌面端）
+            if (!isMobileView()) {
+                onSlideChange(currentSlideIndex);
+            }
         }
 
         function nextSlide() {
@@ -3004,6 +3239,54 @@
         if (!checkHash()) {
             onSlideChange(0); // 初始化第一张幻灯片
         }
+
+        // ==================== 移动端手势与滚动跟踪 ====================
+        (function initMobileSupport() {
+            // --- 左右滑动翻页 ---
+            let touchStartX = 0;
+            let touchStartY = 0;
+
+            document.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+
+            document.addEventListener('touchend', (e) => {
+                if (!isMobileView()) return;
+                const dx = e.changedTouches[0].clientX - touchStartX;
+                const dy = e.changedTouches[0].clientY - touchStartY;
+                // 水平滑动为主且超过 50px 触发翻页
+                if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+                    if (dx < 0) nextSlide();   // 向左 → 下一页
+                    else prevSlide();           // 向右 → 上一页
+                }
+            }, { passive: true });
+
+            // --- IntersectionObserver：滚动时自动更新页码 ---
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    if (!isMobileView()) return;
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && entry.intersectionRatio >= 0.45) {
+                            const idx = Array.from(slides).indexOf(entry.target);
+                            if (idx !== -1 && idx !== currentSlideIndex) {
+                                slides[currentSlideIndex].classList.remove('active');
+                                currentSlideIndex = idx;
+                                slides[currentSlideIndex].classList.add('active');
+                                document.getElementById('currSlideNum').innerText = currentSlideIndex + 1;
+                                const pct = (currentSlideIndex / (totalSlides - 1)) * 100;
+                                document.getElementById('slideProgressBarFill').style.width = pct + '%';
+                                const sec = slides[currentSlideIndex].getAttribute('data-section') || 'PRODUCT';
+                                document.getElementById('currentSectionTag').innerText = sec;
+                                updateDrawerHighlight();
+                            }
+                        }
+                    });
+                }, { threshold: 0.45 });
+
+                slides.forEach(slide => observer.observe(slide));
+            }
+        })();
     </script>
 </body>
 </html>
