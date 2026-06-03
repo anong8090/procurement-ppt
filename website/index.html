@@ -584,9 +584,42 @@
         .arch-screenshot img { width: 100%; display: block; }
 
         /* ========================================================
+           TECHNICAL ARCHITECTURE
+        ======================================================== */
+        #tech-architecture { background: var(--bg-section); }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+        .tech-card {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .tech-icon {
+            width: 52px; height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tech-card h3 { font-size: 1.05rem; font-weight: 700; }
+        .tech-card p { font-size: 0.85rem; color: var(--text-2); line-height: 1.65; flex-grow: 1; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .tech-tag {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.55rem;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.06);
+            color: var(--text-3);
+            border: 1px solid var(--border);
+        }
+
+        /* ========================================================
            ROI
         ======================================================== */
-        #roi { background: var(--bg-section); }
+        #roi { background: var(--bg-deep); }
         .roi-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -623,7 +656,7 @@
         /* ========================================================
            INDUSTRIES
         ======================================================== */
-        #industries { background: var(--bg-deep); }
+        #industries { background: var(--bg-section); }
         .industry-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -658,7 +691,7 @@
         /* ========================================================
            DEPLOY OPTIONS
         ======================================================== */
-        #deploy { background: var(--bg-section); }
+        #deploy { background: var(--bg-deep); }
         .deploy-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -803,6 +836,7 @@
             .tab-content.active { grid-template-columns: 1fr; }
             .tab-screenshot { order: -1; }
             .features-grid { grid-template-columns: 1fr 1fr; }
+            .tech-grid { grid-template-columns: 1fr 1fr; }
             .arch-flow { grid-template-columns: 1fr; gap: 0.75rem; }
             .arch-arrow { transform: rotate(90deg); font-size: 1rem; }
             .roi-grid { grid-template-columns: 1fr; }
@@ -815,6 +849,7 @@
             section { padding: 64px 1.25rem; }
             #hero { padding: 100px 1.25rem 60px; }
             .features-grid { grid-template-columns: 1fr; }
+            .tech-grid { grid-template-columns: 1fr; }
             .footer-top { grid-template-columns: 1fr; gap: 2rem; }
             .stats-inner { grid-template-columns: 1fr 1fr; }
         }
@@ -834,6 +869,7 @@
         <li><a href="#pain">行业痛点</a></li>
         <li><a href="#scenarios">核心场景</a></li>
         <li><a href="#features">产品功能</a></li>
+        <li><a href="#tech-architecture">技术架构</a></li>
         <li><a href="#roi">投资回报</a></li>
         <li><a href="#industries">适用行业</a></li>
         <li><a href="https://anong8090.github.io/procurement-saas/" class="nav-cta" target="_blank">立即体验</a></li>
@@ -1197,6 +1233,57 @@
 </section>
 
 <!-- ========================================================
+     TECHNICAL ARCHITECTURE
+======================================================== -->
+<section id="tech-architecture">
+    <div class="section-inner">
+        <div class="section-header">
+            <div class="section-eyebrow reveal">技术架构</div>
+            <h2 class="section-title reveal reveal-delay-1">企业级双引擎架构<br><span class="hero-title-grad">开放集成与自主可控</span></h2>
+            <p class="section-desc reveal reveal-delay-2">专为大中型企业和国央企设计的高可靠混合架构，兼顾复杂业务流程事务一致性与海量数据 AI 处理效率，无缝对接企业既有信息化生态。</p>
+        </div>
+        <div class="tech-grid">
+            <div class="card tech-card reveal">
+                <div class="tech-icon" style="background:rgba(59,130,246,0.12);">
+                    <i data-lucide="cpu" style="width:26px;height:26px;color:var(--blue-light);"></i>
+                </div>
+                <h3>Java + Python 双擎计算隔离</h3>
+                <p>采用业务与 AI 计算分离架构。核心业务系统基于 Java 生态，确保审批流、合同台账高可用与严密事务控制；AI 数据解析基于高性能 Python 微服务，进行多模态 OCR 报价单识别与大模型推理编排，保障计算资源独立不互相干扰。</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Spring Boot</span>
+                    <span class="tech-tag">FastAPI</span>
+                    <span class="tech-tag">并发隔离</span>
+                </div>
+            </div>
+            <div class="card tech-card reveal reveal-delay-1">
+                <div class="tech-icon" style="background:rgba(13,148,136,0.12);">
+                    <i data-lucide="git-branch" style="width:26px;height:26px;color:#2DD4BF;"></i>
+                </div>
+                <h3>防腐隔离与低耦合集成</h3>
+                <p>内置标准集成中间件，通过“防腐层（隔离映射层）”彻底解耦核心系统与外部 ERP/OA 的直接依赖。通过消息队列（MQ）实现与外部系统的异步、重试对账，确保财务系统与物料主数据的高可靠最终一致性。</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">接口防腐</span>
+                    <span class="tech-tag">异步重试</span>
+                    <span class="tech-tag">OA/ERP对接</span>
+                </div>
+            </div>
+            <div class="card tech-card reveal reveal-delay-2">
+                <div class="tech-icon" style="background:rgba(139,92,246,0.12);">
+                    <i data-lucide="shield-check" style="width:26px;height:26px;color:#A78BFA;"></i>
+                </div>
+                <h3>信创国产化与安全合规</h3>
+                <p>全面兼容国产化信创环境，支持在麒麟 OS、统信 UOS 及国产 CPU 服务器上容器化部署。支持无缝切换到达梦数据库、人大金仓等国产数据库。报价单核心价格字段支持非对称加密，保障开标前的数据物理级防泄密安全。</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">国产信创</span>
+                    <span class="tech-tag">达梦/金仓</span>
+                    <span class="tech-tag">报价加密</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================================
      ROI
 ======================================================== -->
 <section id="roi">
@@ -1362,6 +1449,7 @@
                     <li><a href="#scenarios">核心场景</a></li>
                     <li><a href="#features">功能列表</a></li>
                     <li><a href="#architecture">业务架构</a></li>
+                    <li><a href="#tech-architecture">技术架构</a></li>
                     <li><a href="#roi">ROI 分析</a></li>
                     <li><a href="https://anong8090.github.io/procurement-ppt/" target="_blank">产品 PPT</a></li>
                 </ul>
